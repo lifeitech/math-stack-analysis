@@ -9,23 +9,19 @@ from sklearn.model_selection import StratifiedKFold
 from scipy import interp
 import statsmodels.api as sm
 
-
 # read data
 table = pd.read_csv('/Users/francis/Desktop/data/table.csv')
-
 
 # Standardize features and retain dataframe
 features = table[['Answer_Counts', 'Question_Counts', 'Average_OP_Reputation',
            'Average_Post_Length', 'Average_Math_Ratio', 'response_time_seconds']]
 normalized_features=(features-features.min())/(features.max()-features.min())
 
-
 # Logistic regression with standardized features from dataframe
 reg_table = pd.concat([normalized_features, table['top_user']],axis=1)
 model = sm.Logit.from_formula('top_user ~ Answer_Counts + Question_Counts + Average_OP_Reputation + Average_Post_Length + Average_Math_Ratio + response_time_seconds', data=reg_table)    
 result = model.fit()
 print(result.summary())
-
 
 # ROC curve and AUC score
 fpr, tpr, thresholds = roc_curve(table.top_user, result.predict())
@@ -42,7 +38,6 @@ plt.legend(loc="lower right")
 plt.title('Receiver Operating Characteristic (ROC)')
 plt.tight_layout()
 plt.show()
-
 
 # ROC and AUC under 10-fold cross-validation
 cv = StratifiedKFold(n_splits=10)

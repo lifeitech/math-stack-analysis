@@ -12,7 +12,6 @@ from pyspark.sql.functions import PandasUDFType
 from pyspark.sql.functions import udf
 from pyspark.sql.types import *
 
-
 ## read data
 users = pd.read_csv('/Users/francis/Desktop/data/Users.csv').dropna(how='all').reset_index(drop=True)
 posts = pd.read_csv('/Users/francis/Desktop/data/Posts.csv').dropna(how='all')
@@ -77,7 +76,6 @@ data.select(F.mean(data['num0day'] / data['len']).alias("num0day"),
             F.mean(data['num4day'] / data['len']).alias("num4day"),
             F.mean(data['num5day'] / data['len']).alias("num5day"),
            ).show() # 0.6469871703299993| 0.11061186589714274|0.022316846422198475|0.011893519571513182|0.007689263502991405|0.005734143321178...
-
 
 data_points = [64.7, 11.06, 2.23, 1.19, 0.77, 0.57]
 plt.plot([0,1,2,3,4,5], data_points, 

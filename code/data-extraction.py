@@ -4,7 +4,6 @@ import re
 from bs4 import BeautifulSoup
 
 
-
 """
 Extract Post Data
 """
@@ -56,7 +55,6 @@ with open(path) as f:
     df_posts.to_csv('/Users/francis/Desktop/data/posts.csv', index=False)
 
 
-
 """
 Extract User Data
 """
@@ -81,7 +79,6 @@ df_users = pd.DataFrame(list(map(extract_user_data, rows)))
 df_users.to_csv('/Users/francis/Desktop/data/users.csv', index=False)
 
 
-
 """
 Extract Badge Data
 """
@@ -98,7 +95,6 @@ docs = BeautifulSoup(open(path), 'lxml')
 rows = docs.find_all('row')
 df_badges = pd.DataFrame(list(map(extract_badge_data, rows)))
 df_badges.to_csv('/Users/francis/Desktop/data/badges.csv', index=False)
-
 
 
 """
